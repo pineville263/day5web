@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Build-High | 엔지니어를 위한 스터디 및 프로젝트 팀 빌딩 플랫폼",
   description: "엔지니어를 위한 스터디 및 프로젝트 팀 빌딩 매칭 플랫폼",
+  verification: {
+    google: 'rtXoAllO4EYtch_eiRDc096eafzXCYLbtAUk8POswgA', 
+  },
 };
 
 export default function RootLayout({
