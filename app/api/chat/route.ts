@@ -215,7 +215,6 @@ export async function POST(request: NextRequest) {
               response: text,
               category,
               tokensUsed: usage?.totalTokens,
-              // @ts-ignore
               provider,
             });
           }

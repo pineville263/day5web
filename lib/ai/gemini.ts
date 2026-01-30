@@ -21,6 +21,7 @@ interface SaveAIResponseParams {
   response: string;
   category: string;
   tokensUsed?: number;
+  provider?: string;
 }
 
 /**
@@ -429,6 +430,7 @@ export async function saveAIResponse(
         response: params.response,
         category: params.category,
         tokens_used: params.tokensUsed || null,
+        provider: params.provider || 'google',
       })
       .select('id')
       .single();

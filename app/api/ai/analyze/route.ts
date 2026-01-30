@@ -79,7 +79,6 @@ export async function POST(request: NextRequest) {
         response: result.response,
         category: category,
         tokensUsed: result.tokensUsed,
-        // @ts-ignore: provider 컬럼 대응이 필요한 경우 (임시 무시)
         provider: provider
       });
 
