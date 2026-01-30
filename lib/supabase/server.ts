@@ -12,14 +12,17 @@ import { cookies } from 'next/headers';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 export async function createClient(): Promise<SupabaseClient | null> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // NEXT_PUBLIC_ 접두사가 있는 변수 우선 확인, 없으면 접두사 없는 변수 확인 (서버 사이드 호환성)
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
 
   // 환경 변수가 없으면 null 반환 (UI 테스트용)
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('[Supabase Server] 필수 환경 변수가 누락되었습니다:', {
-      NEXT_PUBLIC_SUPABASE_URL: !!supabaseUrl,
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: !!supabaseAnonKey
+      NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      SUPABASE_URL: !!process.env.SUPABASE_URL,
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      SUPABASE_ANON_KEY: !!process.env.SUPABASE_ANON_KEY
     });
     return null;
   }
