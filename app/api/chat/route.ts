@@ -115,6 +115,7 @@ export async function POST(request: NextRequest) {
       const groqApiKey = process.env.GROQ_API_KEY;
       
       if (provider === 'google' && !googleApiKey) {
+        console.error('[AI Chat] Google API Key is missing');
         return Response.json(
           { 
             error: 'API_KEY_MISSING',
@@ -125,6 +126,7 @@ export async function POST(request: NextRequest) {
       }
 
       if (provider === 'groq' && !groqApiKey) {
+        console.error('[AI Chat] Groq API Key is missing');
         return Response.json(
           { 
             error: 'API_KEY_MISSING',

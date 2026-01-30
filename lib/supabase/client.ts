@@ -14,8 +14,21 @@ export function createClient(): SupabaseClient | null {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[Supabase Client] 초기화 중...', { 
+      hasUrl: !!supabaseUrl, 
+      hasKey: !!supabaseAnonKey 
+    });
+  }
+
   // 환경 변수가 없으면 null 반환 (UI 테스트용)
   if (!supabaseUrl || !supabaseAnonKey) {
+    if (typeof window !== 'undefined') {
+      console.error('[Supabase Client] 필수 환경 변수가 누락되었습니다:', {
+        NEXT_PUBLIC_SUPABASE_URL: !!supabaseUrl,
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: !!supabaseAnonKey
+      });
+    }
     return null;
   }
 
